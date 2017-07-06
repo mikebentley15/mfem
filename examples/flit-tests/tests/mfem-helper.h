@@ -1,6 +1,11 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+#include "mfem.hpp"
+
+#include <memory>
+#include <string>
+#include <sstream>
 
 struct Simulation {
   std::shared_ptr<mfem::Mesh> mesh;
