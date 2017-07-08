@@ -537,7 +537,7 @@ flit::Variant Example10<double>::run_impl(const flit::TestInput<double>& ti) {
    // 9. Save the displaced mesh, the velocity and elastic energy.
    std::ostringstream out;
    {
-      out.precision(8);
+      out.precision(17);
       GridFunction *nodes = &x;
       int owns_nodes = 0;
       mesh->SwapNodes(nodes, owns_nodes);

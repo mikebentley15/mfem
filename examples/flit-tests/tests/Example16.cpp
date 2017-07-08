@@ -214,7 +214,7 @@ flit::Variant Example16<double>::run_impl(const flit::TestInput<double>& ti) {
    bool visit = false;
    int vis_steps = 5;
 
-   int precision = 8;
+   int precision = 17;
    cout.precision(precision);
 
    // 2. Read the mesh from the given mesh file. We can handle triangular,

@@ -166,7 +166,7 @@ flit::Variant Example01<double>::run_impl(const flit::TestInput<double>& ti) {
    //sol_ofs.precision(8);
    //x.Save(sol_ofs);
    std::ostringstream out;
-   out.precision(8);
+   out.precision(17);
    mesh->Print(out);
    out << SEPARATOR;
    x.Save(out);

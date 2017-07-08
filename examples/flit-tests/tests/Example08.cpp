@@ -245,7 +245,7 @@ flit::Variant Example08<double>::run_impl(const flit::TestInput<double>& ti) {
    //     later using GLVis: "glvis -m refined.mesh -g sol.gf".
    std::ostringstream out;
    {
-      out.precision(8);
+      out.precision(17);
       mesh->Print(out);
       out << SEPARATOR;
       x0.Save(out);

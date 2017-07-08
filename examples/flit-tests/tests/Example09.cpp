@@ -250,7 +250,7 @@ flit::Variant Example09<double>::run_impl(const flit::TestInput<double>& ti) {
    bool binary = false;
    int vis_steps = 5;
 
-   int precision = 8;
+   int precision = 17;
 
    // 2. Read the mesh from the given mesh file. We can handle geometrically
    //    periodic meshes in this code.
