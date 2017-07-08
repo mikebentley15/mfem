@@ -333,7 +333,7 @@ flit::Variant Example17<double>::run_impl(const flit::TestInput<double>& ti) {
    //     viewed later using GLVis: "glvis -m displaced.mesh -g sol.gf".
    std::ostringstream out;
    {
-      out.precision(17)
+      out.precision(17);
       *mesh.GetNodes() += x;
       x.Neg(); // x = -x
       mesh.Print(out);
