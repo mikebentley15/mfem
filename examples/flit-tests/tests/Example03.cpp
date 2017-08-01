@@ -71,7 +71,7 @@ protected:
   // Default implementation does nothing
   virtual flit::Variant run_impl(const flit::TestInput<T>& ti) override {
     FLIT_UNUSED(ti);
-    return 0.0;
+    return flit::Variant();
   }
 
 protected:
