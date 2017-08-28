@@ -67,7 +67,8 @@ GT_SRC         += ../../linalg/operator.cpp
 GT_SRC         += ../../linalg/solvers.cpp
 GT_SRC         += ../../linalg/sparsemat.cpp
 
-DEV_SRC        += ../../linalg/vector.cpp
+GT_SRC         += ../../linalg/vector-gt.cpp
+DEV_SRC        += ../../linalg/vector-dev.cpp
 
 GT_SRC         += ../../mesh/element.cpp
 GT_SRC         += ../../mesh/hexahedron.cpp
@@ -104,7 +105,7 @@ diff: $(TARGET_DAT)
 	diff -q $(DAT_COMPARE) $(TARGET_DAT)
 
 $(TARGET_DAT): $(TARGET)
-	./$(TARGET) --output $(TARGET_OUT) 2>&1 >/dev/null
+	./$(TARGET) --timing-repeats 1 --timing-loops 1 --output $(TARGET_OUT) 2>&1 >/dev/null
 
 $(TARGET): $(OBJ) investigate.mk
 	$(LINK_CC) $(CFLAGS) -o $(TARGET) $(OBJ) $(LFLAGS)
