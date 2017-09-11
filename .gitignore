@@ -1,0 +1,8 @@
+*.o
+.*.swp
+.*.swo
+libmfem.a
+config/config.mk
+config/custom.mk
+config/_config.hpp
+
