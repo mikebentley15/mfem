@@ -50,7 +50,7 @@ flit::Variant Example01<double>::run_impl(const flit::TestInput<double>& ti) {
    using namespace std;
    using namespace mfem;
 
-   // 1. Use defulat command-line options
+   // 1. Use defualt command-line options
    const char *mesh_file = "../../data/star.mesh";
    int order = 1;
    bool static_cond = false;
