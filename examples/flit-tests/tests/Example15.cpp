@@ -21,6 +21,8 @@ namespace {
   void UpdateProblem(Mesh &mesh, FiniteElementSpace &fespace,
                      GridFunction &x, BilinearForm &a, LinearForm &b)
   {
+     FLIT_UNUSED(mesh);
+
      // Update the space: recalculate the number of DOFs and construct a matrix
      // that will adjust any GridFunctions to the new mesh state.
      fespace.Update();
@@ -150,7 +152,7 @@ protected:
   // Default implementation does nothing
   virtual flit::Variant run_impl(const flit::TestInput<T>& ti) override {
     FLIT_UNUSED(ti);
-    return 0.0;
+    return flit::Variant();
   }
 
 protected:
@@ -374,7 +376,7 @@ flit::Variant Example15<double>::run_impl(const flit::TestInput<double>& ti) {
    //     using GLVis: "glvis -m refined.mesh -g sol.gf".
    std::ostringstream out;
    out.precision(17);
-   mesh->Print(out);
+   mesh.Print(out);
    out << SEPARATOR;
    x.Save(out);
 
