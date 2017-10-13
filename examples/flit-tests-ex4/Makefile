@@ -1,4 +1,4 @@
-DEV_CC         := icpc
+DEV_CC         := g++
 GT_CC          := g++
 LINK_CC        := icpc
 
@@ -15,7 +15,7 @@ CFLAGS         += -Wuninitialized
 CFLAGS         += -Wno-shift-count-overflow
 
 GT_OPTL        := -O0
-GT_SWITCHES    :=
+GT_SWITCHES    := -fPIC
 GT_CFLAGS      := $(GT_OPTL) $(GT_SWITCHES)
 DEV_OPTL       := -O0
 DEV_SWITCHES   :=
@@ -39,55 +39,116 @@ DAT_COMPARE    := $(DEV_TARGET_DAT)
 DEV_SRC        :=
 GT_SRC         :=
 
-GT_SRC         += main.cpp
-GT_SRC         += tests/Example04.cpp
-GT_SRC         += ../../fem/bilinearform.cpp
-GT_SRC         += ../../fem/bilininteg.cpp
-GT_SRC         += ../../fem/coefficient.cpp
-GT_SRC         += ../../fem/datacollection.cpp
-GT_SRC         += ../../fem/eltrans.cpp
-GT_SRC         += ../../fem/fe.cpp
-GT_SRC         += ../../fem/fe_coll.cpp
-GT_SRC         += ../../fem/fespace.cpp
-GT_SRC         += ../../fem/geom.cpp
-GT_SRC         += ../../fem/gridfunc.cpp
-GT_SRC         += ../../fem/hybridization.cpp
-GT_SRC         += ../../fem/intrules.cpp
-GT_SRC         += ../../fem/linearform.cpp
-GT_SRC         += ../../fem/lininteg.cpp
-GT_SRC         += ../../fem/nonlinearform.cpp
-GT_SRC         += ../../fem/nonlininteg.cpp
-GT_SRC         += ../../fem/staticcond.cpp
-GT_SRC         += ../../general/array.cpp
-GT_SRC         += ../../general/error.cpp
-GT_SRC         += ../../general/gzstream.cpp
-GT_SRC         += ../../general/socketstream.cpp
-GT_SRC         += ../../general/stable3d.cpp
-GT_SRC         += ../../general/table.cpp
-GT_SRC         += ../../general/tic_toc.cpp
-GT_SRC         += ../../linalg/blockmatrix.cpp
-GT_SRC         += ../../linalg/blockoperator.cpp
-GT_SRC         += ../../linalg/blockvector.cpp
-GT_SRC         += ../../linalg/densemat.cpp
-GT_SRC         += ../../linalg/matrix.cpp
-GT_SRC         += ../../linalg/ode.cpp
-GT_SRC         += ../../linalg/operator.cpp
-GT_SRC         += ../../linalg/solvers.cpp
-GT_SRC         += ../../linalg/sparsemat.cpp
-GT_SRC         += ../../linalg/sparsesmoothers.cpp
-GT_SRC         += ../../linalg/vector.cpp
-GT_SRC         += ../../mesh/element.cpp
-GT_SRC         += ../../mesh/hexahedron.cpp
-GT_SRC         += ../../mesh/mesh.cpp
-GT_SRC         += ../../mesh/mesh_readers.cpp
-GT_SRC         += ../../mesh/ncmesh.cpp
-GT_SRC         += ../../mesh/nurbs.cpp
-GT_SRC         += ../../mesh/point.cpp
-GT_SRC         += ../../mesh/quadrilateral.cpp
-GT_SRC         += ../../mesh/segment.cpp
-GT_SRC         += ../../mesh/tetrahedron.cpp
-GT_SRC         += ../../mesh/triangle.cpp
-GT_SRC         += ../../mesh/vertex.cpp
+##GT_SRC        += main.cpp
+##GT_SRC        += tests/Example04.cpp
+##GT_SRC        += ../../fem/bilinearform.cpp
+##GT_SRC        += ../../fem/bilininteg.cpp
+##GT_SRC        += ../../fem/coefficient.cpp
+##GT_SRC        += ../../fem/datacollection.cpp
+##GT_SRC        += ../../fem/eltrans.cpp
+##GT_SRC        += ../../fem/fe.cpp
+##GT_SRC        += ../../fem/fe_coll.cpp
+##GT_SRC        += ../../fem/fespace.cpp
+##GT_SRC        += ../../fem/geom.cpp
+##GT_SRC        += ../../fem/gridfunc.cpp
+##GT_SRC        += ../../fem/hybridization.cpp
+##GT_SRC        += ../../fem/intrules.cpp
+##GT_SRC        += ../../fem/linearform.cpp
+##GT_SRC        += ../../fem/lininteg.cpp
+##GT_SRC        += ../../fem/nonlinearform.cpp
+##GT_SRC        += ../../fem/nonlininteg.cpp
+##GT_SRC        += ../../fem/staticcond.cpp
+##GT_SRC        += ../../general/array.cpp
+##GT_SRC        += ../../general/error.cpp
+##GT_SRC        += ../../general/gzstream.cpp
+##GT_SRC        += ../../general/socketstream.cpp
+##GT_SRC        += ../../general/stable3d.cpp
+##GT_SRC        += ../../general/table.cpp
+##GT_SRC        += ../../general/tic_toc.cpp
+##GT_SRC        += ../../linalg/blockmatrix.cpp
+##GT_SRC        += ../../linalg/blockoperator.cpp
+##GT_SRC        += ../../linalg/blockvector.cpp
+##GT_SRC        += ../../linalg/densemat.cpp
+##GT_SRC        += ../../linalg/matrix.cpp
+##GT_SRC        += ../../linalg/ode.cpp
+##GT_SRC        += ../../linalg/operator.cpp
+##GT_SRC        += ../../linalg/solvers.cpp
+##GT_SRC        += ../../linalg/sparsemat.cpp
+##GT_SRC        += ../../linalg/sparsesmoothers.cpp
+##GT_SRC        += ../../linalg/vector.cpp
+##GT_SRC        += ../../mesh/element.cpp
+##GT_SRC        += ../../mesh/hexahedron.cpp
+##GT_SRC        += ../../mesh/mesh.cpp
+##GT_SRC        += ../../mesh/mesh_readers.cpp
+##GT_SRC        += ../../mesh/ncmesh.cpp
+##
+###DEV_SRC        += ../../mesh/nurbs.cpp
+##GT_SRC        += ../../mesh/nurbs_gt.cpp
+##DEV_SRC        += ../../mesh/nurbs_dev.cpp
+##
+##GT_SRC        += ../../mesh/point.cpp
+##GT_SRC        += ../../mesh/quadrilateral.cpp
+##GT_SRC        += ../../mesh/segment.cpp
+##GT_SRC        += ../../mesh/tetrahedron.cpp
+##GT_SRC        += ../../mesh/triangle.cpp
+##GT_SRC        += ../../mesh/vertex.cpp
+
+DEV_SRC        += main.cpp
+DEV_SRC        += tests/Example04.cpp
+DEV_SRC        += tests/Example05.cpp
+DEV_SRC        += tests/Example09.cpp
+DEV_SRC        += tests/Example10.cpp
+DEV_SRC        += ../../fem/bilinearform.cpp
+DEV_SRC        += ../../fem/bilininteg.cpp
+DEV_SRC        += ../../fem/coefficient.cpp
+DEV_SRC        += ../../fem/datacollection.cpp
+DEV_SRC        += ../../fem/eltrans.cpp
+DEV_SRC        += ../../fem/fe.cpp
+DEV_SRC        += ../../fem/fe_coll.cpp
+DEV_SRC        += ../../fem/fespace.cpp
+DEV_SRC        += ../../fem/geom.cpp
+DEV_SRC        += ../../fem/gridfunc.cpp
+DEV_SRC        += ../../fem/hybridization.cpp
+DEV_SRC        += ../../fem/intrules.cpp
+DEV_SRC        += ../../fem/linearform.cpp
+DEV_SRC        += ../../fem/lininteg.cpp
+DEV_SRC        += ../../fem/nonlinearform.cpp
+DEV_SRC        += ../../fem/nonlininteg.cpp
+DEV_SRC        += ../../fem/staticcond.cpp
+DEV_SRC        += ../../general/array.cpp
+DEV_SRC        += ../../general/error.cpp
+DEV_SRC        += ../../general/gzstream.cpp
+DEV_SRC        += ../../general/socketstream.cpp
+DEV_SRC        += ../../general/stable3d.cpp
+DEV_SRC        += ../../general/table.cpp
+DEV_SRC        += ../../general/tic_toc.cpp
+DEV_SRC        += ../../linalg/blockmatrix.cpp
+DEV_SRC        += ../../linalg/blockoperator.cpp
+DEV_SRC        += ../../linalg/blockvector.cpp
+DEV_SRC        += ../../linalg/densemat.cpp
+DEV_SRC        += ../../linalg/matrix.cpp
+DEV_SRC        += ../../linalg/ode.cpp
+DEV_SRC        += ../../linalg/operator.cpp
+DEV_SRC        += ../../linalg/solvers.cpp
+DEV_SRC        += ../../linalg/sparsemat.cpp
+DEV_SRC        += ../../linalg/sparsesmoothers.cpp
+DEV_SRC        += ../../linalg/vector.cpp
+DEV_SRC        += ../../mesh/element.cpp
+DEV_SRC        += ../../mesh/hexahedron.cpp
+DEV_SRC        += ../../mesh/mesh.cpp
+DEV_SRC        += ../../mesh/mesh_readers.cpp
+DEV_SRC        += ../../mesh/ncmesh.cpp
+
+#DEV_SRC        += ../../mesh/nurbs.cpp
+GT_SRC        += ../../mesh/nurbs_gt.cpp
+GT_SRC        += ../../mesh/nurbs_dev.cpp
+
+DEV_SRC        += ../../mesh/point.cpp
+DEV_SRC        += ../../mesh/quadrilateral.cpp
+DEV_SRC        += ../../mesh/segment.cpp
+DEV_SRC        += ../../mesh/tetrahedron.cpp
+DEV_SRC        += ../../mesh/triangle.cpp
+DEV_SRC        += ../../mesh/vertex.cpp
 
 SOURCE         := $(DEV_SRC)
 SOURCE         += $(GT_SRC)
@@ -98,6 +159,8 @@ DEV_OBJ        := $(addprefix $(OBJ_DIR)/,$(notdir $(DEV_SRC:%.cpp=%_dev.o)))
 GT_OBJ         := $(addprefix $(OBJ_DIR)/,$(notdir $(GT_SRC:%.cpp=%_gt.o)))
 OBJ            := $(DEV_OBJ)
 OBJ            += $(GT_OBJ)
+
+GT_LIB         := libgt.so
 
 DEV_TARGET_OBJ := $(addprefix $(OBJ_DIR)/,$(notdir $(SOURCE:%.cpp=%_dev.o)))
 
@@ -121,16 +184,22 @@ clean:
 	rm -f $(TARGET_DAT)
 	rm -f $(DEV_TARGET_OUT)
 	rm -f $(DEV_TARGET_DAT)
+	rm -f $(GT_LIB)
 	rm -rf obj
 
-$(TARGET): $(OBJ) Makefile
-	$(LINK_CC) $(CFLAGS) -o $(TARGET) $(OBJ) $(LFLAGS)
+$(GT_LIB): $(GT_OBJ) Makefile
+	rm -f $(GT_LIB)
+	$(GT_CC) $(CFLAGS) -shared $(GT_OBJ) $(LFLAGS) -o $(GT_LIB)
+
+$(TARGET): $(DEV_OBJ) $(GT_LIB) Makefile
+	$(LINK_CC) $(CFLAGS) $(DEV_OBJ) $(LFLAGS) -L. -lgt -o $(TARGET)
 
 $(TARGET_DAT): $(TARGET)
-	./$(TARGET) --timing-repeats 1 --timing-loops 1 --output $(TARGET_OUT) 2>&1 >/dev/null
+	LD_LIBRARY_PATH=.:$(LD_LIBRARY_PATH) \
+	  ./$(TARGET) --timing-repeats 1 --timing-loops 1 --output $(TARGET_OUT) 2>&1 >/dev/null
 
 $(DEV_TARGET): $(DEV_TARGET_OBJ)
-	$(LINK_CC) $(CFLAGS) -o $(DEV_TARGET) $(DEV_TARGET_OBJ) $(LFLAGS)
+	$(LINK_CC) $(CFLAGS) $(DEV_TARGET_OBJ) $(LFLAGS) -o $(DEV_TARGET)
 
 $(DAT_COMPARE): $(DEV_TARGET)
 	./$(DEV_TARGET) --timing-repeats 1 --timing-loops 1 --output $(DEV_TARGET_OUT) 2>&1 >/dev/null
