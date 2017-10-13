@@ -28,8 +28,9 @@ LFLAGS         += -Wl,-rpath=$(HOME)/git/FLiT/lib
 
 DEPFLAGS        = -MMD -MF $(patsubst %.o,%.d,$@)
 
-TARGET         := investigaterun
-TARGET_OUT     := investigaterun.csv
+MAKEFILE       := {Makefile}
+TARGET         := investigaterun-$(notdir $(MAKEFILE))
+TARGET_OUT     := $(TARGET).csv
 TARGET_DAT     := $(TARGET_OUT:%=%_Example04_d.dat)
 DEV_TARGET     := devtarget
 DEV_TARGET_OUT := devrun.csv
@@ -52,7 +53,7 @@ GT_OBJ         := $(addprefix $(OBJ_DIR)/,$(notdir $(GT_SRC:%.cpp=%_gt.o)))
 OBJ            := $(DEV_OBJ)
 OBJ            += $(GT_OBJ)
 
-GT_LIB         := libgt.so
+GT_LIB         := libgt-$(notdir $(MAKEFILE)).so
 
 DEV_TARGET_OBJ := $(addprefix $(OBJ_DIR)/,$(notdir $(SOURCE:%.cpp=%_dev.o)))
 
@@ -61,34 +62,43 @@ GT_DEP         := $(GT_OBJ:%.o=%.d)
 DEPS           := $(DEV_DEP)
 DEPS           += $(GT_DEP)
 
-.PHONY: all run target dev clean
+.PHONY: all run target dev objects
 all: diff target dev
 target: $(TARGET)
-dev: $(DEV_TARGET)
+dev: $(DEV_TARGET) $(DEV_TARGET_DAT)
 diff: $(TARGET_DAT) $(DAT_COMPARE)
 	diff -q $(DAT_COMPARE) $(TARGET_DAT)
-clean:
-	rm -f $(TARGET)
-	rm -f $(DEV_TARGET)
+objects: $(DEV_OBJ) $(GT_OBJ)
+
+.PHONY: clean cleanobj cleanbin cleandat distclean veryclean
+clean: cleanbin cleandat
+cleanobj:
 	rm -f $(OBJ)
 	rm -f $(DEV_TARGET_OBJ)
+	rm -rf obj
+cleanbin:
+	rm -f $(TARGET)
+	rm -f $(GT_LIB)
+cleandat:
 	rm -f $(TARGET_OUT)
 	rm -f $(TARGET_DAT)
+distclean: veryclean
+veryclean: clean cleanobj cleanbin cleandat
+	rm -f $(DEV_TARGET)
 	rm -f $(DEV_TARGET_OUT)
 	rm -f $(DEV_TARGET_DAT)
-	rm -f $(GT_LIB)
-	rm -rf obj
 
-$(GT_LIB): $(GT_OBJ) {Makefile}
+
+$(GT_LIB): $(GT_OBJ) $(MAKEFILE)
 	rm -f $(GT_LIB)
 	$(GT_CC) $(CFLAGS) -shared $(GT_OBJ) $(LFLAGS) -o $(GT_LIB)
 
-$(TARGET): $(DEV_OBJ) $(GT_LIB) {Makefile}
-	$(LINK_CC) $(CFLAGS) $(DEV_OBJ) $(LFLAGS) -L. -lgt -o $(TARGET)
+$(TARGET): $(DEV_OBJ) $(GT_LIB) $(MAKEFILE)
+	$(LINK_CC) $(CFLAGS) $(DEV_OBJ) $(LFLAGS) -L. -lgt-$(notdir $(MAKEFILE)) -o $(TARGET)
 
 $(TARGET_DAT): $(TARGET)
 	LD_LIBRARY_PATH=.:$(LD_LIBRARY_PATH) \
-	  ./$(TARGET) --timing-repeats 1 --timing-loops 1 --output $(TARGET_OUT) 2>&1 >/dev/null
+	  ./$(TARGET) --no-timing --output $(TARGET_OUT) 2>&1 >/dev/null
 
 $(DEV_TARGET): $(DEV_TARGET_OBJ)
 	$(LINK_CC) $(CFLAGS) $(DEV_TARGET_OBJ) $(LFLAGS) -o $(DEV_TARGET)
@@ -100,7 +110,8 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%_dev.o: %.cpp | $(OBJ_DIR)
-	$(DEV_CC) $(DEV_CFLAGS) $(CFLAGS) $(DEPFLAGS) -c $< -o $@ \
+	@echo "$< -> $@"
+	@$(DEV_CC) $(DEV_CFLAGS) $(CFLAGS) $(DEPFLAGS) -c $< -o $@ \
 	  -DFLIT_HOST='"$(HOSTNAME)"' \
 	  -DFLIT_COMPILER='"$(DEV_CC)"' \
 	  -DFLIT_OPTL='"$(DEV_OPTL)"' \
@@ -108,7 +119,8 @@ $(OBJ_DIR)/%_dev.o: %.cpp | $(OBJ_DIR)
 	  -DFLIT_FILENAME='"$(notdir $(TARGET))"'
 
 $(OBJ_DIR)/%_gt.o: %.cpp | $(OBJ_DIR)
-	$(GT_CC) $(GT_CFLAGS) $(CFLAGS) $(DEPFLAGS) -c $< -o $@ \
+	@echo "$< -> $@"
+	@$(GT_CC) $(GT_CFLAGS) $(CFLAGS) $(DEPFLAGS) -c $< -o $@ \
 	  -DFLIT_HOST='"$(HOSTNAME)"' \
 	  -DFLIT_COMPILER='"$(GT_CC)"' \
 	  -DFLIT_OPTL='"$(GT_OPTL)"' \
