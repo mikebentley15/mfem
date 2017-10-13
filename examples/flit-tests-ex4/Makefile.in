@@ -39,58 +39,8 @@ DAT_COMPARE    := $(DEV_TARGET_DAT)
 DEV_SRC        :=
 GT_SRC         :=
 
-GT_SRC        += main.cpp
-GT_SRC        += $(wildcard tests/*.cpp)
-GT_SRC        += ../../fem/bilinearform.cpp
-GT_SRC        += ../../fem/bilininteg.cpp
-GT_SRC        += ../../fem/coefficient.cpp
-GT_SRC        += ../../fem/datacollection.cpp
-GT_SRC        += ../../fem/eltrans.cpp
-GT_SRC        += ../../fem/fe.cpp
-GT_SRC        += ../../fem/fe_coll.cpp
-GT_SRC        += ../../fem/fespace.cpp
-GT_SRC        += ../../fem/geom.cpp
-GT_SRC        += ../../fem/gridfunc.cpp
-GT_SRC        += ../../fem/hybridization.cpp
-GT_SRC        += ../../fem/intrules.cpp
-GT_SRC        += ../../fem/linearform.cpp
-GT_SRC        += ../../fem/lininteg.cpp
-GT_SRC        += ../../fem/nonlinearform.cpp
-GT_SRC        += ../../fem/nonlininteg.cpp
-GT_SRC        += ../../fem/staticcond.cpp
-GT_SRC        += ../../general/array.cpp
-GT_SRC        += ../../general/error.cpp
-GT_SRC        += ../../general/gzstream.cpp
-GT_SRC        += ../../general/socketstream.cpp
-GT_SRC        += ../../general/stable3d.cpp
-GT_SRC        += ../../general/table.cpp
-GT_SRC        += ../../general/tic_toc.cpp
-GT_SRC        += ../../linalg/blockmatrix.cpp
-GT_SRC        += ../../linalg/blockoperator.cpp
-GT_SRC        += ../../linalg/blockvector.cpp
-GT_SRC        += ../../linalg/densemat.cpp
-GT_SRC        += ../../linalg/matrix.cpp
-GT_SRC        += ../../linalg/ode.cpp
-GT_SRC        += ../../linalg/operator.cpp
-GT_SRC        += ../../linalg/solvers.cpp
-GT_SRC        += ../../linalg/sparsemat.cpp
-GT_SRC        += ../../linalg/sparsesmoothers.cpp
-GT_SRC        += ../../linalg/vector.cpp
-GT_SRC        += ../../mesh/element.cpp
-GT_SRC        += ../../mesh/hexahedron.cpp
-GT_SRC        += ../../mesh/mesh.cpp
-GT_SRC        += ../../mesh/mesh_readers.cpp
-GT_SRC        += ../../mesh/ncmesh.cpp
-GT_SRC        += ../../mesh/nurbs.cpp
-GT_SRC        += ../../mesh/point.cpp
-GT_SRC        += ../../mesh/quadrilateral.cpp
-GT_SRC        += ../../mesh/segment.cpp
-GT_SRC        += ../../mesh/tetrahedron.cpp
-GT_SRC        += ../../mesh/triangle.cpp
-GT_SRC        += ../../mesh/vertex.cpp
-
-#GT_SRC        += ../../mesh/nurbs_gt.cpp
-#GT_SRC        += ../../mesh/nurbs_dev.cpp
+{GT_SRC}
+{DEV_SRC}
 
 SOURCE         := $(DEV_SRC)
 SOURCE         += $(GT_SRC)
@@ -129,11 +79,11 @@ clean:
 	rm -f $(GT_LIB)
 	rm -rf obj
 
-$(GT_LIB): $(GT_OBJ) Makefile
+$(GT_LIB): $(GT_OBJ) {Makefile}
 	rm -f $(GT_LIB)
 	$(GT_CC) $(CFLAGS) -shared $(GT_OBJ) $(LFLAGS) -o $(GT_LIB)
 
-$(TARGET): $(DEV_OBJ) $(GT_LIB) Makefile
+$(TARGET): $(DEV_OBJ) $(GT_LIB) {Makefile}
 	$(LINK_CC) $(CFLAGS) $(DEV_OBJ) $(LFLAGS) -L. -lgt -o $(TARGET)
 
 $(TARGET_DAT): $(TARGET)
