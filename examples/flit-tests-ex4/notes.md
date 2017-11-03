@@ -252,6 +252,10 @@ combinations of three files.
 
 1. Demonstrate this problem happens even when the FLiT testing framework is not
    used.
+    - Verified for example 4
+    - **Could not verify for example 5!!!**  Need to revisit
+    - **Could not verify for example 9!!!**  Need to revisit
+    - Verified for example 10
 2. Show that the other three tests are also victims of the Intel linker
    optimizations.
     1. Example 05

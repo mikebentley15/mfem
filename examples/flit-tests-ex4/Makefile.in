@@ -25,6 +25,7 @@ LFLAGS         := -lm
 LFLAGS         += -lstdc++
 LFLAGS         += -L$(HOME)/git/FLiT/lib -lflit
 LFLAGS         += -Wl,-rpath=$(HOME)/git/FLiT/lib
+DEV_LFLAGS     := $(LFLAGS)
 
 DEPFLAGS        = -MMD -MF $(patsubst %.o,%.d,$@)
 
@@ -94,14 +95,14 @@ $(GT_LIB): $(GT_OBJ) $(MAKEFILE)
 	$(GT_CC) $(CFLAGS) -shared $(GT_OBJ) $(LFLAGS) -o $(GT_LIB)
 
 $(TARGET): $(DEV_OBJ) $(GT_LIB) $(MAKEFILE)
-	$(LINK_CC) $(CFLAGS) $(DEV_OBJ) $(LFLAGS) -L. -lgt-$(notdir $(MAKEFILE)) -o $(TARGET)
+	$(LINK_CC) $(CFLAGS) $(DEV_OBJ) $(DEV_LFLAGS) -L. -lgt-$(notdir $(MAKEFILE)) -o $(TARGET)
 
 $(TARGET_DAT): $(TARGET)
 	LD_LIBRARY_PATH=.:$(LD_LIBRARY_PATH) \
 	  ./$(TARGET) --no-timing --output $(TARGET_OUT) 2>&1 >/dev/null
 
 $(DEV_TARGET): $(DEV_TARGET_OBJ)
-	$(LINK_CC) $(CFLAGS) $(DEV_TARGET_OBJ) $(LFLAGS) -o $(DEV_TARGET)
+	$(LINK_CC) $(CFLAGS) $(DEV_TARGET_OBJ) $(DEV_LFLAGS) -o $(DEV_TARGET)
 
 $(DAT_COMPARE): $(DEV_TARGET)
 	./$(DEV_TARGET) --timing-repeats 1 --timing-loops 1 --output $(DEV_TARGET_OUT) 2>&1 >/dev/null
