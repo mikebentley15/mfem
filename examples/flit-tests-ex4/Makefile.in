@@ -2,7 +2,7 @@ DEV_CC         := g++
 GT_CC          := g++
 LINK_CC        := icpc
 
-HOSTNAME        := $(shell hostname)
+HOSTNAME       := $(shell hostname)
 
 CFLAGS         := -std=c++11
 CFLAGS         += -I.
