@@ -25,6 +25,7 @@ LFLAGS         := -lm
 LFLAGS         += -lstdc++
 LFLAGS         += -L$(HOME)/git/FLiT/lib -lflit
 LFLAGS         += -Wl,-rpath=$(HOME)/git/FLiT/lib
+LFLAGS         += -lrt
 DEV_LFLAGS     := $(LFLAGS)
 
 DEPFLAGS        = -MMD -MF $(patsubst %.o,%.d,$@)
