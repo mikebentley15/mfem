@@ -60,11 +60,11 @@ switches = ''
     #'-O...' ?
   ]
   switches_list = [
-    '',
     '-fassociative-math',
     '-mavx',
     '-mp1',
     '-mavx2 -mfma',
+    ''
     # ...
   ]
   

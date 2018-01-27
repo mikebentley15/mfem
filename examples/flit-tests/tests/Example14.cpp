@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 namespace {
   const std::string SEPARATOR = "#### MY SEPARATOR ####\n";
@@ -16,7 +17,7 @@ class Example14 : public flit::TestBase<T> {
 public:
   Example14(std::string id) : flit::TestBase<T>(std::move(id)) {}
   virtual size_t getInputsPerRun() override { return 0; }
-  virtual flit::TestInput<T> getDefaultInput() override { return {}; }
+  virtual std::vector<T> getDefaultInput() override { return {}; }
 
   virtual long double compare(const std::string &ground_truth,
                               const std::string &test_results) const override {
@@ -34,7 +35,7 @@ public:
 
 protected:
   // Default implementation does nothing
-  virtual flit::Variant run_impl(const flit::TestInput<T>& ti) override {
+  virtual flit::Variant run_impl(const std::vector<T>& ti) override {
     FLIT_UNUSED(ti);
     return flit::Variant();
   }
@@ -44,7 +45,7 @@ protected:
 };
 
 template<>
-flit::Variant Example14<double>::run_impl(const flit::TestInput<double>& ti) {
+flit::Variant Example14<double>::run_impl(const std::vector<double>& ti) {
    FLIT_UNUSED(ti);
    using namespace std;
    using namespace mfem;
