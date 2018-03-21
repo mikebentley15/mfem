@@ -69,6 +69,7 @@ CC_REQUIRED    += -I../..
 # or rpath
 #   LD_REQUIRED += -Wl,-rpath=<abs-path-to-library-dir>
 #LD_REQUIRED    += -L../.. -lmfem
+LD_REQUIRED    += -v
 
 # compiler and linker flags respectively - specifically for a dev build
 # - DEV_CFLAGS:   non-recorded compiler flags (such as includes)
