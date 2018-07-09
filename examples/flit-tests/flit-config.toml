@@ -3,14 +3,11 @@ type = 'sqlite'
 filepath = 'results.sqlite'
 
 [[hosts]]
-name = 'bihexal'
-flit_path = '/home/mbentley/git/FLiT/scripts/flitcli/flit.py'
-config_dir = '/home/mbentley/git/FLiT/scripts/flitcli/config'
 
 [hosts.dev_build]
-compiler_name = 'icpc'
-optimization_level = '-O0'
-switches = ''
+compiler_name = 'g++'
+optimization_level = '-O2'
+switches = '-funsafe-math-optimizations'
 
 [hosts.ground_truth]
 compiler_name = 'g++'
